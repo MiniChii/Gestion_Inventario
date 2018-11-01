@@ -54,6 +54,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @Table(name = "pets")
 @JsonSerialize(using = JacksonCustomPetSerializer.class)
 @JsonDeserialize(using = JacksonCustomPetDeserializer.class)
+
 public class Pet extends NamedEntity {
 
     @Column(name = "birth_date")
