@@ -31,7 +31,7 @@ public class Cuadrante {
 	
 	@ManyToOne
 	@Column(name= "estante_id")
-	private Integer estante_id;
+	private Estante estante_id;
 
 	public Integer getId() {
 		return id;
@@ -49,11 +49,11 @@ public class Cuadrante {
 		this.max_estante = max_estante;
 	}
 
-	public Integer getEstante_id() {
+	public Estante getEstante_id() {
 		return estante_id;
 	}
 
-	public void setEstante_id(Integer estante_id) {
+	public void setEstante_id(Estante estante_id) {
 		this.estante_id = estante_id;
 	}
 	

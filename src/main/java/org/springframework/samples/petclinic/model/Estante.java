@@ -1,14 +1,18 @@
 package org.springframework.samples.petclinic.model;
 
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -39,6 +43,9 @@ public class Estante {
     @Column(name= "max_volumen")
     private Integer max_volumen;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuadrante", fetch = FetchType.EAGER)
+    private Set<Estante> estantes;
+    
 	public Integer getId() {
 		return id;
 	}
