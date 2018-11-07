@@ -25,8 +25,6 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @Table(name = "estante")
 @JsonSerialize(using = JacksonCustomEstanteSerializer.class)
 @JsonDeserialize(using = JacksonCustomEstanteDeserializer.class)
-
-
 public class Estante {
 
 	@Id

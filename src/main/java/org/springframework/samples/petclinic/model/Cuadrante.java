@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,38 +24,50 @@ public class Cuadrante {
 	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private int id;
 	
 	
 	@Column(name= "max_estante")
 	private Integer max_estante;
 	
-	@ManyToOne
-	@Column(name= "estante_id")
-	private Integer estante_id;
+
+    @ManyToOne
+    @JoinColumn(name = "estante_id")
+    private int estante_id;
+
 
 	public Integer getId() {
 		return id;
 	}
 
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 
 	public Integer getMax_estante() {
 		return max_estante;
 	}
 
+
 	public void setMax_estante(Integer max_estante) {
 		this.max_estante = max_estante;
 	}
+
 
 	public Integer getEstante_id() {
 		return estante_id;
 	}
 
+
 	public void setEstante_id(Integer estante_id) {
 		this.estante_id = estante_id;
 	}
+
 	
+
+
+
+
 }

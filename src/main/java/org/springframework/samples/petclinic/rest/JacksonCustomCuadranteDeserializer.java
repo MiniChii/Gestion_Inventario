@@ -45,7 +45,7 @@ public class JacksonCustomCuadranteDeserializer extends StdDeserializer<Cuadrant
 	public Cuadrante deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
 		JsonNode node = parser.getCodec().readTree(parser);
 		Cuadrante Cuadrante = new Cuadrante();
-		Integer id = node.get("id").asInt();
+		int id = node.get("id").asInt();
 		Integer max_estante = node.get("estante").asInt();
 		Integer estante_id = node.get("estante_id").asInt();
 
