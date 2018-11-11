@@ -55,11 +55,13 @@ public class JacksonCustomPetDeserializer extends StdDeserializer<Pet> {
 		PetType petType = new PetType();
 		ObjectMapper mapper = new ObjectMapper();
 		Date birthDate = null;
+		
 		JsonNode node = parser.getCodec().readTree(parser);
 		JsonNode owner_node = node.get("owner");
 		JsonNode type_node = node.get("type");
 		owner = mapper.treeToValue(owner_node, Owner.class);
 		petType = mapper.treeToValue(type_node, PetType.class);
+		
 		int petId = node.get("id").asInt();
 		String name = node.get("name").asText(null);
 		String birthDateStr = node.get("birthDate").asText(null);
