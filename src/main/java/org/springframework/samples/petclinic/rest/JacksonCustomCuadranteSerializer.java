@@ -57,12 +57,12 @@ public class JacksonCustomCuadranteSerializer extends StdSerializer<Cuadrante> {
 		}
 		jgen.writeNumberField("max_estante", cuad.getMax_estante());
 		
-		Estante estante = cuad.getEstante_id();
+		/*Estante estante = cuad.getEstante_id();
 		jgen.writeObjectFieldStart("estante_id");
 		jgen.writeNumberField("id", estante.getId());
 		jgen.writeNumberField("num_repisas",estante.getNum_repisas());
 		jgen.writeNumberField("max_volumen", estante.getMax_volumen());
-		
+		*/
 				
 		
 	}

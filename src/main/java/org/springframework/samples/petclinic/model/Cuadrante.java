@@ -1,11 +1,15 @@
 package org.springframework.samples.petclinic.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.samples.petclinic.rest.JacksonCustomCuadranteDeserializer;
@@ -15,7 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
-@Table(name = "cuadrante")
+@Table(name = "Cuadrante")
 @JsonSerialize(using = JacksonCustomCuadranteSerializer.class)
 @JsonDeserialize(using = JacksonCustomCuadranteDeserializer.class)
 
@@ -28,10 +32,10 @@ public class Cuadrante {
 	
 	@Column(name= "max_estante")
 	private Integer max_estante;
-	
-	@ManyToOne
+
 	@Column(name= "estante_id")
-	private Estante estante_id;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Cuadrante", fetch = FetchType.EAGER)
+    private Set<Estante> estantes;
 
 	public Integer getId() {
 		return id;
@@ -49,12 +53,13 @@ public class Cuadrante {
 		this.max_estante = max_estante;
 	}
 
-	public Estante getEstante_id() {
-		return estante_id;
+	public Set<Estante> getEstantes() {
+		return estantes;
 	}
 
-	public void setEstante_id(Estante estante_id) {
-		this.estante_id = estante_id;
+	public void setEstantes(Set<Estante> estantes) {
+		this.estantes = estantes;
 	}
-	
+
+
 }

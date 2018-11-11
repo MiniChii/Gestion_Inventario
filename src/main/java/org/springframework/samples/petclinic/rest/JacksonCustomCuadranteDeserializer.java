@@ -49,13 +49,13 @@ public class JacksonCustomCuadranteDeserializer extends StdDeserializer<Cuadrant
 
 		
 		Cuadrante Cuadrante = new Cuadrante();
-		Estante estante=new Estante();
+		//Estante estante=new Estante();
 		
-		ObjectMapper mapper = new ObjectMapper();
+		//ObjectMapper mapper = new ObjectMapper();
 		JsonNode node = parser.getCodec().readTree(parser);
-		JsonNode estante_node = node.get("estante_id");
-		JsonNode type_node = node.get("type");
-		estante = mapper.treeToValue(estante_node, Estante.class);
+		//JsonNode estante_node = node.get("estante_id");
+		//JsonNode type_node = node.get("type");
+		//estante = mapper.treeToValue(estante_node, Estante.class);
 		Integer id = node.get("id").asInt();
 		Integer max_estante = node.get("estante").asInt();
 		
@@ -64,7 +64,7 @@ public class JacksonCustomCuadranteDeserializer extends StdDeserializer<Cuadrant
 		}
         Cuadrante.setId(id);
         Cuadrante.setMax_estante(max_estante);
-        Cuadrante.setEstante_id(estante);
+
 		return Cuadrante;
 	}
 

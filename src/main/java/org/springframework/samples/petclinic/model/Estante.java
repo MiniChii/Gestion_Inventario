@@ -1,24 +1,14 @@
 package org.springframework.samples.petclinic.model;
 
-import java.util.Date;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.samples.petclinic.rest.JacksonCustomEstanteDeserializer;
 import org.springframework.samples.petclinic.rest.JacksonCustomEstanteSerializer;
 
@@ -26,11 +16,9 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
-@Table(name = "estante")
+@Table(name = "Estante")
 @JsonSerialize(using = JacksonCustomEstanteSerializer.class)
 @JsonDeserialize(using = JacksonCustomEstanteDeserializer.class)
-
-
 public class Estante {
 
 	@Id
@@ -43,9 +31,10 @@ public class Estante {
     @Column(name= "max_volumen")
     private Integer max_volumen;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cuadrante", fetch = FetchType.EAGER)
-    private Set<Estante> estantes;
-    
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Cuadrante cuadrante;
+
 	public Integer getId() {
 		return id;
 	}
@@ -65,9 +54,17 @@ public class Estante {
 	public Integer getMax_volumen() {
 		return max_volumen;
 	}
-	
+
 	public void setMax_volumen(Integer max_volumen) {
 		this.max_volumen = max_volumen;
+	}
+
+	public Cuadrante getCuadrante() {
+		return cuadrante;
+	}
+
+	public void setCuadrante(Cuadrante cuadrante) {
+		this.cuadrante = cuadrante;
 	}
     
 }

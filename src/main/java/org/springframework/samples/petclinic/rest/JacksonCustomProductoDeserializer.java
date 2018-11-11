@@ -18,13 +18,19 @@ package org.springframework.samples.petclinic.rest;
 
 import java.io.IOException;
 
+import org.springframework.samples.petclinic.model.Cuadrante;
+import org.springframework.samples.petclinic.model.Especie;
+import org.springframework.samples.petclinic.model.Estante;
 import org.springframework.samples.petclinic.model.Producto;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+
+
 
 /**
  * @author Vitaliy Fedoriv
@@ -43,27 +49,39 @@ public class JacksonCustomProductoDeserializer extends StdDeserializer<Producto>
 
 	@Override
 	public Producto deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
-		JsonNode node = parser.getCodec().readTree(parser);
+			
 		Producto Producto = new Producto();
+		Estante estante = new Estante();
+		Especie especie =  new Especie();
+		ObjectMapper mapper = new ObjectMapper();
+		
+		JsonNode node = parser.getCodec().readTree(parser);
+		JsonNode esta_node = node.get("estante");
+		JsonNode espe_node = node.get("especie");
+		
+		estante = mapper.treeToValue(esta_node, Estante.class);
+		especie = mapper.treeToValue(espe_node, Especie.class);
+		
+
 		int id = node.get("id").asInt();
 		String nombre = node.get("nombre").asText(null);
 		String unidad_medida = node.get("unidad_medida").asText(null);
 		Integer precio = node.get("precio").asInt();
 		Integer contenido = node.get("contenido").asInt();
 		Integer num_minimo = node.get("num_minimo").asInt();
-		Integer especie_id = node.get("especie_id").asInt();
-		Integer cuadrante_id = node.get("especie_id").asInt();
+		
 
 		if (!(id == 0)) {
 			Producto.setId(id);
 		}
+		
         Producto.setNombre(nombre);
         Producto.setUnidad_medida(unidad_medida);
         Producto.setPrecio(precio);
         Producto.setContenido(contenido);
         Producto.setNum_minimo(num_minimo);
-        Producto.setEspecie_id(especie_id);
-        Producto.setCuadrante_id(cuadrante_id);
+        Producto.setEspecie(especie);
+        Producto.setEstante(estante);
 
 		return Producto;
 	}
