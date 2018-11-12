@@ -1,15 +1,10 @@
 package org.springframework.samples.petclinic.model;
 
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.samples.petclinic.rest.JacksonCustomCuadranteDeserializer;
@@ -32,7 +27,6 @@ public class Cuadrante {
 	
 	@Column(name= "max_estante")
 	private Integer max_estante;
-
 
 
 	public Integer getId() {
