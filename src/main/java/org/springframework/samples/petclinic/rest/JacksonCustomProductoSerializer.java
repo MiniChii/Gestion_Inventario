@@ -20,6 +20,8 @@ import java.io.IOException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 
+import org.springframework.samples.petclinic.model.Estante;
+import org.springframework.samples.petclinic.model.Especie;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
@@ -60,8 +62,22 @@ public class JacksonCustomProductoSerializer extends StdSerializer<Producto> {
 		jgen.writeNumberField("precio", prod.getPrecio());
 		jgen.writeNumberField("contenido", prod.getContenido());
 		jgen.writeNumberField("num_minimo", prod.getNum_minimo());
-		jgen.writeNumberField("especie_id", prod.getEspecie_id());
-		jgen.writeNumberField("cuadrante_id", prod.getCuadrante_id());
+		
+		Especie esp = prod.getEspecie();
+		jgen.writeObjectFieldStart("especie");
+		jgen.writeNumberField("id", esp.getId());
+		jgen.writeStringField("nombre", esp.getNombre());
+		jgen.writeStringField("etapa", esp.getEtapa());
+		jgen.writeEndObject(); // especie
+		
+		Estante esta = prod.getEstante();
+		jgen.writeObjectFieldStart("estante");
+		jgen.writeNumberField("id", esta.getId());
+		jgen.writeNumberField("num_repisas", esta.getNum_repisas());
+		jgen.writeNumberField("max_volumen", esta.getMax_volumen());
+		jgen.writeEndObject(); // estante
+		
+		
 
 	}
 

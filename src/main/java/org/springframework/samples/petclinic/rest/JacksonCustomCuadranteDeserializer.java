@@ -19,11 +19,14 @@ package org.springframework.samples.petclinic.rest;
 import java.io.IOException;
 
 import org.springframework.samples.petclinic.model.Cuadrante;
+import org.springframework.samples.petclinic.model.Estante;
+import org.springframework.samples.petclinic.model.Owner;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 /**
@@ -43,18 +46,25 @@ public class JacksonCustomCuadranteDeserializer extends StdDeserializer<Cuadrant
 
 	@Override
 	public Cuadrante deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
-		JsonNode node = parser.getCodec().readTree(parser);
+
+		
 		Cuadrante Cuadrante = new Cuadrante();
+		//Estante estante=new Estante();
+		
+		//ObjectMapper mapper = new ObjectMapper();
+		JsonNode node = parser.getCodec().readTree(parser);
+		//JsonNode estante_node = node.get("estante_id");
+		//JsonNode type_node = node.get("type");
+		//estante = mapper.treeToValue(estante_node, Estante.class);
 		Integer id = node.get("id").asInt();
 		Integer max_estante = node.get("estante").asInt();
-		Integer estante_id = node.get("estante_id").asInt();
-
+		
 		if (!(id == 0)) {
 			Cuadrante.setId(id);
 		}
         Cuadrante.setId(id);
         Cuadrante.setMax_estante(max_estante);
-        Cuadrante.setEstante_id(estante_id);
+
 		return Cuadrante;
 	}
 

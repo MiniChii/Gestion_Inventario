@@ -27,7 +27,7 @@ public class Cuadrante {
 	
 	@Column(name= "max_estante")
 	private Integer max_estante;
-	
+
 
 	public Integer getId() {
 		return id;

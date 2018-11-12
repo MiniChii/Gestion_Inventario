@@ -24,6 +24,7 @@ import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.model.Cuadrante;
+import org.springframework.samples.petclinic.model.Estante;
 import org.springframework.samples.petclinic.model.Visit;
 
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -54,10 +55,15 @@ public class JacksonCustomCuadranteSerializer extends StdSerializer<Cuadrante> {
 		} else {
 			jgen.writeNumberField("id", cuad.getId());
 		}
-
-		jgen.writeNumberField("id", cuad.getId());
 		jgen.writeNumberField("max_estante", cuad.getMax_estante());
-		jgen.writeNumberField("estante_id", cuad.getEstante_id());
+		
+		/*Estante estante = cuad.getEstante_id();
+		jgen.writeObjectFieldStart("estante_id");
+		jgen.writeNumberField("id", estante.getId());
+		jgen.writeNumberField("num_repisas",estante.getNum_repisas());
+		jgen.writeNumberField("max_volumen", estante.getMax_volumen());
+		*/
+				
 		
 	}
 
