@@ -32,7 +32,7 @@ public class Estante {
     private Integer max_volumen;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "cuadrante_id")
     private Cuadrante cuadrante;
 
 	public Integer getId() {

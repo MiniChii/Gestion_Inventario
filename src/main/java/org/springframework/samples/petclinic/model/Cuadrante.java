@@ -33,9 +33,7 @@ public class Cuadrante {
 	@Column(name= "max_estante")
 	private Integer max_estante;
 
-	@Column(name= "estante_id")
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "Cuadrante", fetch = FetchType.EAGER)
-    private Set<Estante> estantes;
+
 
 	public Integer getId() {
 		return id;
@@ -51,14 +49,6 @@ public class Cuadrante {
 
 	public void setMax_estante(Integer max_estante) {
 		this.max_estante = max_estante;
-	}
-
-	public Set<Estante> getEstantes() {
-		return estantes;
-	}
-
-	public void setEstantes(Set<Estante> estantes) {
-		this.estantes = estantes;
 	}
 
 

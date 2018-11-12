@@ -18,7 +18,8 @@ package org.springframework.samples.petclinic.repository;
 
 import java.util.Collection;
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.petclinic.model.Producto;
+import org.springframework.samples.petclinic.model.Estante;
+
 
 /**
  * Repository class for <code>Pet</code> domain objects All method names are
@@ -32,20 +33,14 @@ import org.springframework.samples.petclinic.model.Producto;
  * @author Michael Isvy
  * @author Vitaliy Fedoriv
  */
-public interface ProductoRepository {
+public interface EstanteRepository {
 
-	Producto findById(int id) throws DataAccessException;
+	Estante findById(int id) throws DataAccessException;
 
-	Collection<Producto> findAll() throws DataAccessException;
+	Collection<Estante> findAll() throws DataAccessException;
 
-	Collection<Producto> findbyNombre(String Nombre) throws DataAccessException;
+	void save(Estante estante) throws DataAccessException;
 
-	Collection<Producto> findbyEspecie(int id_especie) throws DataAccessException;
-
-	Collection<Producto> findbyPrecio(int precio) throws DataAccessException;
-
-	void save(Producto producto) throws DataAccessException;
-
-	void delete(Producto producto) throws DataAccessException;
+	void delete(Estante estante) throws DataAccessException;
 
 }
