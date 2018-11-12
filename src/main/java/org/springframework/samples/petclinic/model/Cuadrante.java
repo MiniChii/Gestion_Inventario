@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.samples.petclinic.rest.JacksonCustomCuadranteDeserializer;
@@ -30,11 +28,11 @@ public class Cuadrante {
 	@Column(name= "max_estante")
 	private Integer max_estante;
 	
-
+/*
     @ManyToOne
     @JoinColumn(name = "estante_id")
     private int estante_id;
-
+*/
 
 	public Integer getId() {
 		return id;
@@ -55,7 +53,7 @@ public class Cuadrante {
 		this.max_estante = max_estante;
 	}
 
-
+/*
 	public Integer getEstante_id() {
 		return estante_id;
 	}
@@ -65,7 +63,7 @@ public class Cuadrante {
 		this.estante_id = estante_id;
 	}
 
-	
+	*/
 
 
 
