@@ -94,7 +94,7 @@ public class JacksonCustomProductoSerializer extends StdSerializer<Producto> {
 			jgen.writeNullField("especie_id");
 		}
 		if(prod.getEstanteId()==null) {
-			jgen.writeNullField("especie_id");
+			jgen.writeNullField("estante_id");
 		}
 		/*		
 		jgen.writeNumberField("especie_id", prod.getEspecieId());
