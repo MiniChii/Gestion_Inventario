@@ -40,7 +40,7 @@ public interface ProductoRepository {
 
 	Collection<Producto> findByNombre(String Nombre) throws DataAccessException;
 
-	Collection<Producto> findByEspecie(int id_especie) throws DataAccessException;
+	Collection<Producto> findByEspecieId(int id_especie) throws DataAccessException;
 
 	Collection<Producto> findByPrecio(int precio) throws DataAccessException;
 

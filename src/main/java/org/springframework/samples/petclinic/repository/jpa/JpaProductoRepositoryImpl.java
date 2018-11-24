@@ -76,7 +76,7 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Producto> findAll() throws DataAccessException {
-		Query query = this.em.createQuery("SELECT prod FROM Producto prod");
+		Query query = this.em.createQuery("SELECT producto FROM Producto producto");
         return query.getResultList();
 	}
 
@@ -100,7 +100,7 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Producto> findByEspecie(int id_especie) throws DataAccessException {
+	public Collection<Producto> findByEspecieId(int id_especie) throws DataAccessException {
 		// TODO Auto-generated method stub
 		Query query = this.em.createQuery("SELECT producto FROM Producto WHERE producto.id =:id");
 		query.setParameter("id", id_especie);

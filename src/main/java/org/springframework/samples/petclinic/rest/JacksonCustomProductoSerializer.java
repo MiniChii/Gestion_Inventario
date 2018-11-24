@@ -48,21 +48,58 @@ public class JacksonCustomProductoSerializer extends StdSerializer<Producto> {
 	}
 
 	@Override
-	public void serialize(Producto prod, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+	public void serialize(Producto prod, JsonGenerator jgen, 
+			SerializerProvider provider) throws IOException {
 
 		jgen.writeStartObject();
+		//id
 		if (prod.getId() == null) {
 			jgen.writeNullField("id");
 		} else {
 			jgen.writeNumberField("id", prod.getId());
 		}
-
+		//nombre que no debe ser null
 		jgen.writeStringField("nombre", prod.getNombre());
-		jgen.writeStringField("unidad_medida", prod.getUnidad_medida());
-		jgen.writeNumberField("precio", prod.getPrecio());
-		jgen.writeNumberField("contenido", prod.getContenido());
-		jgen.writeNumberField("num_minimo", prod.getNum_minimo());
+		//uni_medid
+		if(prod.getUnidadMedida()==null) {
+			jgen.writeNullField("unidad_medida");
+		}else {
+			jgen.writeStringField("unidad_medida", prod.getUnidadMedida());
+		}
+		//precio
+		if(prod.getPrecio()==null) {
+			jgen.writeNullField("precio");
+		}else {
+			jgen.writeNumberField("precio", prod.getPrecio());
+		}
+		//contenido
+		if(prod.getContenido()==null) {
+			jgen.writeNullField("contenido");
+		}else {
+			jgen.writeNumberField("contenido", prod.getContenido());
+		}
 		
+		if(prod.getNumMinimo()==null) {
+			jgen.writeNullField("num_minimo");
+		}else {
+			jgen.writeNumberField("num_minimo", prod.getNumMinimo());
+		}
+		
+		
+		//jgen.writeNumberField("estante_id", prod.getEstanteId());
+		//jgen.writeNumberField("especie_id", prod.getEspecieId());
+		
+		
+		if(prod.getEspecieId()==null) {
+			jgen.writeNullField("especie_id");
+		}
+		if(prod.getEstanteId()==null) {
+			jgen.writeNullField("especie_id");
+		}
+		/*		
+		jgen.writeNumberField("especie_id", prod.getEspecieId());
+		*/
+		/*
 		Especie esp = prod.getEspecie();
 		jgen.writeObjectFieldStart("especie");
 		jgen.writeNumberField("id", esp.getId());
@@ -77,7 +114,8 @@ public class JacksonCustomProductoSerializer extends StdSerializer<Producto> {
 		jgen.writeNumberField("max_volumen", esta.getMax_volumen());
 		jgen.writeEndObject(); // estante
 		
-		
+		*/
+		jgen.writeEndObject();
 
 	}
 

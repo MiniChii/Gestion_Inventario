@@ -48,27 +48,34 @@ public class JacksonCustomProductoDeserializer extends StdDeserializer<Producto>
 	}
 
 	@Override
-	public Producto deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
+	public Producto deserialize(JsonParser parser, DeserializationContext context) 
+				throws IOException, JsonProcessingException {
 			
 		Producto Producto = new Producto();
-		Estante estante = new Estante();
+		JsonNode node = parser.getCodec().readTree(parser);
+		
+		/*Estante estante = new Estante();
 		Especie especie =  new Especie();
 		ObjectMapper mapper = new ObjectMapper();
-		
-		JsonNode node = parser.getCodec().readTree(parser);
+
 		JsonNode esta_node = node.get("estante");
 		JsonNode espe_node = node.get("especie");
 		
 		estante = mapper.treeToValue(esta_node, Estante.class);
 		especie = mapper.treeToValue(espe_node, Especie.class);
-		
+		*/
 
 		int id = node.get("id").asInt();
 		String nombre = node.get("nombre").asText(null);
-		String unidad_medida = node.get("unidad_medida").asText(null);
-		Integer precio = node.get("precio").asInt();
-		Integer contenido = node.get("contenido").asInt();
-		Integer num_minimo = node.get("num_minimo").asInt();
+		String unidadMedida = node.get("unidad_medida").asText(null);
+		Integer precio = node.get("precio").asInt(-1);
+		Integer contenido = node.get("contenido").asInt(-1);
+		Integer num_minimo = node.get("num_minimo").asInt(-1);
+		
+		//ver si funciona
+		Integer estanteId= node.get("estante_id").asInt(-1);
+		Integer especieId= node.get("especie_id").asInt(-1);
+	
 		
 
 		if (!(id == 0)) {
@@ -76,12 +83,13 @@ public class JacksonCustomProductoDeserializer extends StdDeserializer<Producto>
 		}
 		
         Producto.setNombre(nombre);
-        Producto.setUnidad_medida(unidad_medida);
+        Producto.setUnidadMedida(unidadMedida);
         Producto.setPrecio(precio);
         Producto.setContenido(contenido);
-        Producto.setNum_minimo(num_minimo);
-        Producto.setEspecie(especie);
-        Producto.setEstante(estante);
+        Producto.setNumMinimo(num_minimo);
+        Producto.setEstanteId(estanteId);
+        Producto.setEspecieId(especieId);
+        
 
 		return Producto;
 	}

@@ -45,8 +45,10 @@ public class JacksonCustomOwnerSerializer extends StdSerializer<Owner> {
 	}
 
 	@Override
-	public void serialize(Owner owner, JsonGenerator jgen, SerializerProvider provider) throws IOException {
+	public void serialize(Owner owner, JsonGenerator jgen, 
+			SerializerProvider provider) throws IOException {
 		Format formatter = new SimpleDateFormat("yyyy/MM/dd");
+		
 		jgen.writeStartObject();
 		if (owner.getId() == null) {
 			jgen.writeNullField("id");

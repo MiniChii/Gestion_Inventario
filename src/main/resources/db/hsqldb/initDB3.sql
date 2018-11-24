@@ -80,7 +80,7 @@ CREATE TABLE productos (
   contenido 	INT,
   num_minimo 	INT,
   especie_id 	INT,
-  cuadrante_id 	INT,
+  estante_id 	INT,
 );
 
 CREATE TABLE roles (

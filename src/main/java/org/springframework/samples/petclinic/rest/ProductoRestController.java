@@ -54,7 +54,7 @@ public class ProductoRestController {
 	//primer servicio
 	@PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
 	@RequestMapping(value = "/*/nombre/{nombre}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Collection<Producto>> getProductoList(@PathVariable("nombre") String prodNombre) {
+	public ResponseEntity<Collection<Producto>> getProductosList(@PathVariable("nombre") String prodNombre) {
 		if (prodNombre == null) {
 			prodNombre = "";
 		}
@@ -118,10 +118,10 @@ public class ProductoRestController {
 			return new ResponseEntity<Producto>(HttpStatus.NOT_FOUND);
 		}
 		currentProd.setNombre(prod.getNombre());
-		currentProd.setUnidad_medida(prod.getUnidad_medida());
+		currentProd.setUnidadMedida(prod.getUnidadMedida());
 		currentProd.setPrecio(prod.getPrecio());
 		currentProd.setContenido(prod.getContenido());
-		currentProd.setNum_minimo(prod.getNum_minimo());
+		currentProd.setNumMinimo(prod.getNumMinimo());
 		this.invService.saveProducto(currentProd);
 		return new ResponseEntity<Producto>(currentProd, HttpStatus.NO_CONTENT);
 	}

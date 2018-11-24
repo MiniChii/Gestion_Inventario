@@ -17,6 +17,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.samples.petclinic.rest.JacksonCustomProductoDeserializer;
 import org.springframework.samples.petclinic.rest.JacksonCustomProductoSerializer;
 
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -36,7 +37,7 @@ public class Producto{
     private String nombre;
     
     @Column(name= "unidad_medida")
-    private String unidad_medida;
+    private String unidadMedida;
     
     @Column(name= "precio")
     private Integer precio;
@@ -46,9 +47,17 @@ public class Producto{
     private Integer contenido;
     
     @Column(name= "num_minimo")
-    private Integer num_minimo;
+    private Integer numMinimo;
     
+ 
+   //viendo si funciona
+    @Column(name= "estante_id")
+    private Integer estanteId;
     
+
+	@Column(name= "especie_id")
+    private Integer especieId;
+    /*
     @ManyToOne
     @JoinColumn(name = "especie_id")
     private Especie especie;
@@ -56,7 +65,7 @@ public class Producto{
     @ManyToOne
     @JoinColumn(name = "estante_id")
     private Estante Estante;
-     
+     */
 	public Integer getId() {
 		return id;
 	}
@@ -73,12 +82,12 @@ public class Producto{
 		this.nombre = nombre;
 	}
 
-	public String getUnidad_medida() {
-		return unidad_medida;
+	public String getUnidadMedida() {
+		return unidadMedida;
 	}
 
-	public void setUnidad_medida(String unidad_medida) {
-		this.unidad_medida = unidad_medida;
+	public void setUnidadMedida(String unidad_medida) {
+		this.unidadMedida = unidad_medida;
 	}
 
 	public Integer getPrecio() {
@@ -97,6 +106,37 @@ public class Producto{
 		this.contenido = contenido;
 	}
 
+	public Integer getNumMinimo() {
+		return numMinimo;
+	}
+
+	public void setNumMinimo(Integer numMinimo) {
+		this.numMinimo = numMinimo;
+	}
+	
+
+	public Integer getEspecieId() {
+		return especieId;
+	}
+
+	
+	public void setEspecieId(Integer especieId) {
+		this.especieId = especieId;
+	}
+	
+
+    public Integer getEstanteId() {
+		return estanteId;
+	}
+
+	public void setEstanteId(Integer estanteId) {
+		this.estanteId = estanteId;
+	}
+
+	
+	
+
+/*
 	public Integer getNum_minimo() {
 		return num_minimo;
 	}
@@ -119,7 +159,7 @@ public class Producto{
 
 	public void setEstante(Estante Estante) {
 		this.Estante = Estante;
-	}
+	}*/
 	
     
     
