@@ -38,11 +38,11 @@ public interface ProductoRepository {
 
 	Collection<Producto> findAll() throws DataAccessException;
 
-	Collection<Producto> findbyNombre(String Nombre) throws DataAccessException;
+	Collection<Producto> findByNombre(String Nombre) throws DataAccessException;
 
-	Collection<Producto> findbyEspecie(int id_especie) throws DataAccessException;
+	Collection<Producto> findByEspecie(int id_especie) throws DataAccessException;
 
-	Collection<Producto> findbyPrecio(int precio) throws DataAccessException;
+	Collection<Producto> findByPrecio(int precio) throws DataAccessException;
 
 	void save(Producto producto) throws DataAccessException;
 

@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
-@Table(name = "Producto")
+@Table(name = "productos")
 @JsonSerialize(using = JacksonCustomProductoSerializer.class)
 @JsonDeserialize(using = JacksonCustomProductoDeserializer.class)
 
@@ -48,6 +48,7 @@ public class Producto{
     @Column(name= "num_minimo")
     private Integer num_minimo;
     
+    
     @ManyToOne
     @JoinColumn(name = "especie_id")
     private Especie especie;
@@ -55,7 +56,7 @@ public class Producto{
     @ManyToOne
     @JoinColumn(name = "estante_id")
     private Estante Estante;
-
+     
 	public Integer getId() {
 		return id;
 	}
@@ -103,7 +104,7 @@ public class Producto{
 	public void setNum_minimo(Integer num_minimo) {
 		this.num_minimo = num_minimo;
 	}
-
+	
 	public Especie getEspecie() {
 		return especie;
 	}

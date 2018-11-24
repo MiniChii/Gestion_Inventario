@@ -23,8 +23,9 @@ import javax.persistence.Query;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.petclinic.model.Owner;
+import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.repository.OwnerRepository;
+import org.springframework.samples.petclinic.repository.ProductoRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -38,7 +39,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 @Profile("jpa")
-public class JpaOwnerRepositoryImpl implements OwnerRepository {
+public class JpaProductoRepositoryImpl implements ProductoRepository{
 
     @PersistenceContext
     private EntityManager em;
@@ -51,45 +52,70 @@ public class JpaOwnerRepositoryImpl implements OwnerRepository {
      * - creating a Ligtweight class (example here: https://community.jboss.org/wiki/LightweightClass)
      * - Turning on lazy-loading and using {@link OpenSessionInViewFilter}
      */
-    @SuppressWarnings("unchecked")
-    public Collection<Owner> findByLastName(String lastName) {
-        // using 'join fetch' because a single query should load both owners and pets
-        // using 'left join fetch' because it might happen that an owner does not have pets yet
-        Query query = this.em.createQuery("SELECT DISTINCT owner FROM Owner owner left join fetch owner.pets WHERE owner.lastName LIKE :lastName");
-        query.setParameter("lastName", lastName + "%");
-        return query.getResultList();
-    }
 
     @Override
-    public Owner findById(int id) {
+    public Producto findById(int id) {
         // using 'join fetch' because a single query should load both owners and pets
         // using 'left join fetch' because it might happen that an owner does not have pets yet
-        Query query = this.em.createQuery("SELECT owner FROM Owner owner left join fetch owner.pets WHERE owner.id =:id");
+        Query query = this.em.createQuery("SELECT producto FROM Producto WHERE producto.id =:id");
         query.setParameter("id", id);
-        return (Owner) query.getSingleResult();
+        return (Producto) query.getSingleResult();
     }
 
 
     @Override
-    public void save(Owner owner) {
-        if (owner.getId() == null) {
-            this.em.persist(owner);
+    public void save(Producto prod) {
+        if (prod.getId() == null) {
+            this.em.persist(prod);
         } else {
-            this.em.merge(owner);
+            this.em.merge(prod);
         }
 
     }
     
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Owner> findAll() throws DataAccessException {
-		Query query = this.em.createQuery("SELECT owner FROM Owner owner");
+	public Collection<Producto> findAll() throws DataAccessException {
+		Query query = this.em.createQuery("SELECT prod FROM Producto prod");
         return query.getResultList();
 	}
 
 	@Override
-	public void delete(Owner owner) throws DataAccessException {
-		this.em.remove(this.em.contains(owner) ? owner : this.em.merge(owner));
+	public void delete(Producto prod) throws DataAccessException {
+		this.em.remove(this.em.contains(prod) ? prod : this.em.merge(prod));
 	}
+
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Producto> findByNombre(String Nombre) throws DataAccessException {
+		// TODO Auto-generated method stub
+		Query query = this.em.createQuery("SELECT producto FROM Producto WHERE producto.nombre =:nombre");
+		query.setParameter("nombre", Nombre);
+		return query.getResultList();
+
+	}
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Producto> findByEspecie(int id_especie) throws DataAccessException {
+		// TODO Auto-generated method stub
+		Query query = this.em.createQuery("SELECT producto FROM Producto WHERE producto.id =:id");
+		query.setParameter("id", id_especie);
+		return query.getResultList();
+	}
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Producto> findByPrecio(int precio) throws DataAccessException {
+		// TODO Auto-generated method stub
+		Query query = this.em.createQuery("SELECT producto FROM Producto WHERE producto.precio =:precio");
+		query.setParameter("precio", precio);
+		return query.getResultList();
+	}
+
 
 }
