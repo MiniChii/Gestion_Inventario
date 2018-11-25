@@ -55,4 +55,6 @@ public interface ProductoRepository {
 	Collection<Producto> OrderByPrecio();
 
 
+	Collection<Producto> OrderByNombre() throws DataAccessException;
+
 }
