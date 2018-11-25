@@ -91,9 +91,12 @@ public class InventarioServiceImpl implements InventarioService {
 	@Transactional
 	public void deleteProducto(Producto prod) throws DataAccessException {
 		productoRepository.delete(prod);
-		
 	}
-	
 
-
+	@Override
+	@Transactional
+	public Collection<Producto> OrderByNombre() throws DataAccessException {
+		// TODO Auto-generated method stub
+		return productoRepository.OrderByNombre();
+	}
 }
