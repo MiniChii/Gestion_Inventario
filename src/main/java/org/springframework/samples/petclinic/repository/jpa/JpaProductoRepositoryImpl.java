@@ -62,7 +62,6 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
         return (Producto) query.getSingleResult();
     }
 
-
     @Override
     public void save(Producto prod) {
         if (prod.getId() == null) {
@@ -85,8 +84,6 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
 		this.em.remove(this.em.contains(prod) ? prod : this.em.merge(prod));
 	}
 
-
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Producto> findByNombre(String Nombre) throws DataAccessException {
@@ -94,9 +91,7 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
 		Query query = this.em.createQuery("SELECT producto FROM Producto WHERE producto.nombre =:nombre");
 		query.setParameter("nombre", Nombre);
 		return query.getResultList();
-
 	}
-
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -107,7 +102,6 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
 		return query.getResultList();
 	}
 
-
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Producto> findByPrecio(int precio) throws DataAccessException {
@@ -116,6 +110,37 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
 		query.setParameter("precio", precio);
 		return query.getResultList();
 	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Producto>findByNombreStartingWithIgnoreCase(String nombre){
+		Query query = this.em.createQuery("SELECT producto FROM Producto WHERE producto.nombre =:nombre");
+		query.setParameter("nombre", nombre);
+		return query.getResultList();
+	}
+
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Producto> OrderByNombre(){
+		Query query = this.em.createQuery("SELECT producto FROM Producto");
+		return query.getResultList();
+	}
+
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Producto> findByPrecioBetween(int minPrecioProd, int maxPrecioProd) {
+		Query query = this.em.createQuery("SELECT producto FROM Producto WHERE producto.precio between minPrecioProd and maxPrecioProd ");
+		query.setParameter("minPrecioProd", minPrecioProd);
+		query.setParameter("maxPrecioProd", maxPrecioProd);		
+		return query.getResultList();
+	}
+
+
+
+
 
 
 }

@@ -19,6 +19,7 @@ import java.util.Collection;
 
 import org.springframework.context.annotation.Profile;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.query.Param;
 
@@ -34,15 +35,20 @@ import org.springframework.samples.petclinic.repository.ProductoRepository;
  */
 
 @Profile("spring-data-jpa")
-public interface SpringDataProductoRepository extends ProductoRepository,Repository<Producto, Integer> {
-
+public interface SpringDataProductoRepository extends ProductoRepository,Repository<Producto, Integer>,CrudRepository<Producto, Integer> {
+	/*
     @Override
     //@Query("SELECT DISTINCT owner FROM Owner owner left join fetch owner.pets WHERE owner.lastName LIKE :lastName%")
-    @Query("SELECT DISTINCT prod FROM Producto prod WHERE prod.nombre LIKE :nombre%")
+    @Query("SELECT DISTINCT prod FROM Producto prod WHERE prod.nombre LIKE :%nombre%")
     public Collection<Producto> findByNombre(@Param("nombre") String nameString);
 
     // @Query("SELECT owner FROM Owner owner left join fetch owner.pets WHERE owner.id =:id")
     @Override
     @Query("SELECT producto FROM Producto producto WHERE producto.id =:id")
     public Producto findById(@Param("id") int id);
+    
+	
+	@Override
+	@Query("SELECT producto FROM Producto producto WHERE producto.nombre =:nombre")
+	public Collection<Producto> findByNombreContainingIgnoreCase(@Param("nombre") String nombre);*/
 }

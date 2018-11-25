@@ -29,12 +29,13 @@ import org.springframework.samples.petclinic.model.Producto;
  * @author Vitaliy Fedoriv
  */
 public interface InventarioService {
-
+	
 	Collection<Producto> findProductoByName(String prodNombre) throws DataAccessException;
 	Collection<Producto> findAllProductos() throws DataAccessException;
+	public Collection<Producto> findProductoByPrecio(int minPrecioProd,int maxPrecioProd) throws DataAccessException;	
 	Producto findProductoById(int prodId) throws DataAccessException;
 	void saveProducto(Producto prod) throws DataAccessException;
 	void deleteProducto(Producto prod) throws DataAccessException;
-	
+	Collection<Producto> OrderByNombre() throws DataAccessException;
 
 }

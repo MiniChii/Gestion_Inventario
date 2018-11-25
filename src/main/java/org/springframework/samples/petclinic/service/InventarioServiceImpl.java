@@ -60,8 +60,13 @@ public class InventarioServiceImpl implements InventarioService {
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<Producto> findProductoByName(String prodNombre) throws DataAccessException {
-		return productoRepository.findByNombre(prodNombre);
+		return productoRepository.findByNombreStartingWithIgnoreCase(prodNombre);
 
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<Producto> findProductoByPrecio(int minPrecioProd,int maxPrecioProd) throws DataAccessException {
+		return productoRepository.findByPrecioBetween( minPrecioProd, maxPrecioProd);
 	}
 
 	@Override
@@ -86,9 +91,12 @@ public class InventarioServiceImpl implements InventarioService {
 	@Transactional
 	public void deleteProducto(Producto prod) throws DataAccessException {
 		productoRepository.delete(prod);
-		
 	}
-	
 
-
+	@Override
+	@Transactional
+	public Collection<Producto> OrderByNombre() throws DataAccessException {
+		// TODO Auto-generated method stub
+		return productoRepository.OrderByNombre();
+	}
 }
