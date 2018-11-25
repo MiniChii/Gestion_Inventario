@@ -53,7 +53,7 @@ public class ProductoRestController {
 
 	//primer getProductosList -> por nombre
 	@PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
-	@RequestMapping(value = "/*/nombre/{nombre}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/buscarNombre/{nombre}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Collection<Producto>> getProductosList(@PathVariable("nombre") String prodNombre) {
 		if (prodNombre == null) {
 			prodNombre = "";
@@ -66,7 +66,7 @@ public class ProductoRestController {
 	}
 	
 	@PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
-	@RequestMapping(value = "/buscar/{precioMin}/{precioMax}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "/buscarPrecio/{precioMin}/{precioMax}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Collection<Producto>> getProductosListPrecio(@PathVariable("precioMin") Integer precioMin,@PathVariable("precioMax") Integer precioMax) {
 		if (precioMin == null) {
 			precioMin = 0;
@@ -80,12 +80,17 @@ public class ProductoRestController {
 		}
 		return new ResponseEntity<Collection<Producto>>(productos, HttpStatus.OK);
 	}
-
 	
 	@PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
-	@RequestMapping(value = "/buscar/{id_especie}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<Collection<Producto>> getProductosListEspecie(@PathVariable("id_especie") Integer id_especie) {
-		Collection<Producto> productos = this.invService.findByEspecieId(id_especie);
+	@RequestMapping(value = "/buscarEspecie/{idEspe}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Collection<Producto>> getProductosListEspecie(@PathVariable("idEspe") int idEspe) {
+		Collection<Producto> productos = this.invService.findByEspecieId(idEspe);
+		if (productos.isEmpty()) {
+			return new ResponseEntity<Collection<Producto>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Collection<Producto>>(productos, HttpStatus.OK);
+	}
+	 
 
 	@PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
 	@RequestMapping(value = "/ordenarPrecio", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -135,7 +140,7 @@ public class ProductoRestController {
 			return new ResponseEntity<Producto>(headers, HttpStatus.BAD_REQUEST);
 		}
 		this.invService.saveProducto(prod);
-		headers.setLocation(ucBuilder.path("/api/owners/{id}").buildAndExpand(prod.getId()).toUri());
+		headers.setLocation(ucBuilder.path("/api/productos/{id}").buildAndExpand(prod.getId()).toUri());
 		return new ResponseEntity<Producto>(prod, headers, HttpStatus.CREATED);
 	}
     //updateProducto por put con la id
