@@ -118,7 +118,6 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
 		query.setParameter("nombre", nombre);
 		return query.getResultList();
 	}
-
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -126,8 +125,6 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
 		Query query = this.em.createQuery("SELECT producto FROM Producto");
 		return query.getResultList();
 	}
-
-
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -145,9 +142,6 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
 		Query query = this.em.createQuery("SELECT producto FROM Producto ");
 		return query.getResultList();
 	}
-
-
-
 
 
 
