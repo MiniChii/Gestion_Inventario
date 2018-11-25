@@ -138,4 +138,13 @@ public class ProductoRestController {
 		return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
 	}
 
+    @PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
+	@RequestMapping(value = "/ordenarNombre", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Collection<Producto>> getProductosOrdenadosPorNombre() {
+		Collection<Producto> prods = this.invService.OrderByNombre();
+		if (prods.isEmpty()) {
+			return new ResponseEntity<Collection<Producto>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Collection<Producto>>(prods, HttpStatus.OK);
+	}
 }

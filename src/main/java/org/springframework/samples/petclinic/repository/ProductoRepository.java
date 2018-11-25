@@ -50,4 +50,6 @@ public interface ProductoRepository {
 
 	Collection<Producto> findByNombreContainingIgnoreCase(String nombre) throws DataAccessException;
 
+	Collection<Producto> OrderByNombre() throws DataAccessException;
+
 }
