@@ -78,23 +78,23 @@ public class JacksonCustomProductoSerializer extends StdSerializer<Producto> {
 		}else {
 			jgen.writeNumberField("contenido", prod.getContenido());
 		}
-		
+		//num minimo
 		if(prod.getNumMinimo()==null) {
 			jgen.writeNullField("num_minimo");
 		}else {
 			jgen.writeNumberField("num_minimo", prod.getNumMinimo());
 		}
-		
-		
-		//jgen.writeNumberField("estante_id", prod.getEstanteId());
-		//jgen.writeNumberField("especie_id", prod.getEspecieId());
-		
-		
+		//especie id
 		if(prod.getEspecieId()==null) {
 			jgen.writeNullField("especie_id");
+		}else {
+			jgen.writeNumberField("especie_id", prod.getEspecieId());
 		}
+		//estante id
 		if(prod.getEstanteId()==null) {
 			jgen.writeNullField("estante_id");
+		}else {
+			jgen.writeNumberField("estante_id", prod.getEstanteId());
 		}
 		/*		
 		jgen.writeNumberField("especie_id", prod.getEspecieId());
