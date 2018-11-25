@@ -63,8 +63,14 @@ INSERT  INTO productos VALUES (153, 'Pelota', 'no aplica', 1000, null, 10, null,
 INSERT  INTO productos VALUES (155, 'Plato', 'no aplica', 5000, null, 20, null, null);
 INSERT  INTO productos VALUES (157, 'Jaula', 'no aplica', 15000, null, 30, null, null);
 INSERT  INTO productos VALUES (159, 'Rueda', 'no aplica', 2500, null, 20, null, null);
+INSERT  INTO productos VALUES (161, 'rascador', 'no aplica', 5000, null, 15, 1, null);
 
-
+INSERT INTO especie VALUES (1, 'cat', 'adulto');
+INSERT INTO especie VALUES (2, 'dog', 'adulto');
+INSERT INTO especie VALUES (3, 'lizard', 'bebe');
+INSERT INTO especie VALUES (4, 'snake', 'bebe');
+INSERT INTO especie VALUES (5, 'bird', 'adulto');
+INSERT INTO especie VALUES (6, 'hamster', 'bebe');
 
 INSERT INTO users(username,password,enabled) VALUES ('admin','admin', true);
 

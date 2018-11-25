@@ -91,4 +91,8 @@ CREATE TABLE roles (
 ALTER TABLE roles ADD CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES users (username);
 CREATE INDEX fk_username_idx ON roles (username);
 
-
+CREATE TABLE especie (
+  id   INTEGER IDENTITY PRIMARY KEY,
+  name VARCHAR(45),
+  etapa VARCHAR(45),
+);

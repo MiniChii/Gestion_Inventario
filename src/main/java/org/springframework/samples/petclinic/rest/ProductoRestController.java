@@ -80,6 +80,17 @@ public class ProductoRestController {
 		}
 		return new ResponseEntity<Collection<Producto>>(productos, HttpStatus.OK);
 	}
+	
+	@PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
+	@RequestMapping(value = "/buscar/{id_especie}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Collection<Producto>> getProductosListEspecie(@PathVariable("id_especie") Integer id_especie) {
+		Collection<Producto> productos = this.invService.findByEspecieId(id_especie);
+		if (productos.isEmpty()) {
+			return new ResponseEntity<Collection<Producto>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Collection<Producto>>(productos, HttpStatus.OK);
+	}
+	
 	// getProductos() 
     @PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

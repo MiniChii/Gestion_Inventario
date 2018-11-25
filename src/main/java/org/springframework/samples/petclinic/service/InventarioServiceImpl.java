@@ -80,6 +80,8 @@ public class InventarioServiceImpl implements InventarioService {
 	public Producto findProductoById(int prodId) throws DataAccessException {
 		return productoRepository.findById(prodId);	
 	}
+	
+	
 
 	@Override
 	@Transactional
@@ -98,5 +100,11 @@ public class InventarioServiceImpl implements InventarioService {
 	public Collection<Producto> OrderByNombre() throws DataAccessException {
 		// TODO Auto-generated method stub
 		return productoRepository.OrderByNombre();
+	}
+
+	@Override
+	public Collection<Producto> findByEspecieId(int id_especie) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return productoRepository.findByEspecieId(id_especie);
 	}
 }
