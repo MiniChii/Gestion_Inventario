@@ -120,9 +120,19 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<Producto> findByNombreContainingIgnoreCase(String nombre) {
+	public Collection<Producto>findByNombreStartingWithIgnoreCase(String nombre){
 		Query query = this.em.createQuery("SELECT producto FROM Producto WHERE producto.nombre =:nombre");
 		query.setParameter("nombre", nombre);
+		return query.getResultList();
+	}
+
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Producto> findByPrecioBetween(int minPrecioProd, int maxPrecioProd) {
+		Query query = this.em.createQuery("SELECT producto FROM Producto WHERE producto.precio between minPrecioProd and maxPrecioProd ");
+		query.setParameter("minPrecioProd", minPrecioProd);
+		query.setParameter("maxPrecioProd", maxPrecioProd);		
 		return query.getResultList();
 	}
 

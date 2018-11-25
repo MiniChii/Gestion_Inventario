@@ -60,8 +60,13 @@ public class InventarioServiceImpl implements InventarioService {
 	@Override
 	@Transactional(readOnly = true)
 	public Collection<Producto> findProductoByName(String prodNombre) throws DataAccessException {
-		return productoRepository.findByNombreContainingIgnoreCase(prodNombre);
+		return productoRepository.findByNombreStartingWithIgnoreCase(prodNombre);
 
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<Producto> findProductoByPrecio(int minPrecioProd,int maxPrecioProd) throws DataAccessException {
+		return productoRepository.findByPrecioBetween( minPrecioProd, maxPrecioProd);
 	}
 
 	@Override
