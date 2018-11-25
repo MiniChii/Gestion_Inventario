@@ -95,6 +95,21 @@ public class InventarioServiceImpl implements InventarioService {
 		productoRepository.delete(prod);
 	}
 
+
+
+	@Override
+	@Transactional(readOnly = true)
+	public Collection<Producto> OrderByPrecio() {
+		return productoRepository.OrderByPrecio();	
+
+	}
+
+
+	
+
+
+
+
 	@Override
 	@Transactional
 	public Collection<Producto> OrderByNombre() throws DataAccessException {

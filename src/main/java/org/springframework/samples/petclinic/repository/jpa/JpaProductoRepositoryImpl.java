@@ -135,4 +135,15 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
 		return query.getResultList();
 	}
 
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Producto> OrderByPrecio() {
+		Query query = this.em.createQuery("SELECT producto FROM Producto ");
+		return query.getResultList();
+	}
+
+
+
+
 }
