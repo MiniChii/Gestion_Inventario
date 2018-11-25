@@ -80,11 +80,19 @@ public class ProductoRestController {
 		}
 		return new ResponseEntity<Collection<Producto>>(productos, HttpStatus.OK);
 	}
+
+	
+	@PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
+	@RequestMapping(value = "/buscar/{id_especie}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Collection<Producto>> getProductosListEspecie(@PathVariable("id_especie") Integer id_especie) {
+		Collection<Producto> productos = this.invService.findByEspecieId(id_especie);
+
 	@PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
 	@RequestMapping(value = "/ordenarPrecio", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Collection<Producto>> getProductosOrdenPrecio() {
 
 		Collection<Producto> productos = this.invService.OrderByPrecio();
+
 		if (productos.isEmpty()) {
 			return new ResponseEntity<Collection<Producto>>(HttpStatus.NOT_FOUND);
 		}

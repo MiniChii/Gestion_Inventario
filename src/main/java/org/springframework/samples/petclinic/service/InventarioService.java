@@ -42,5 +42,9 @@ public interface InventarioService {
 
 	Collection<Producto> OrderByNombre() throws DataAccessException;
 
+	public Collection<Producto> findByEspecieId(int id_especie) throws DataAccessException;
+
+
+
 
 }
