@@ -48,7 +48,10 @@ public interface ProductoRepository {
 
 	void delete(Producto producto) throws DataAccessException;
 
-	Collection<Producto> findByNombreContainingIgnoreCase(String nombre) throws DataAccessException;
+	Collection<Producto> findByNombreStartingWithIgnoreCase(String prodNombre);
+
+	Collection<Producto> findByPrecioBetween(int minPrecioProd, int maxPrecioProd);
+
 
 	Collection<Producto> OrderByNombre() throws DataAccessException;
 

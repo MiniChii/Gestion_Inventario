@@ -51,7 +51,7 @@ public class ProductoRestController {
 	@Autowired //para el singleton
 	private InventarioService invService;
 
-	//primer servicio
+	//primer getProductosList -> por nombre
 	@PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
 	@RequestMapping(value = "/*/nombre/{nombre}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Collection<Producto>> getProductosList(@PathVariable("nombre") String prodNombre) {
@@ -64,7 +64,23 @@ public class ProductoRestController {
 		}
 		return new ResponseEntity<Collection<Producto>>(productos, HttpStatus.OK);
 	}
-
+	
+	@PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
+	@RequestMapping(value = "/ordenar/{precioMin}/{precioMax}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	public ResponseEntity<Collection<Producto>> getProductosListPrecio(@PathVariable("precioMin") Integer precioMin,@PathVariable("precioMax") Integer precioMax) {
+		if (precioMin == null) {
+			precioMin = 0;
+		}
+		if (precioMax == null) {
+			precioMax = Integer.MAX_VALUE;
+		}
+		Collection<Producto> productos = this.invService.findProductoByPrecio(precioMin, precioMax);
+		if (productos.isEmpty()) {
+			return new ResponseEntity<Collection<Producto>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Collection<Producto>>(productos, HttpStatus.OK);
+	}
+	// getProductos() 
     @PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Collection<Producto>> getProductos() {
@@ -75,6 +91,7 @@ public class ProductoRestController {
 		return new ResponseEntity<Collection<Producto>>(prods, HttpStatus.OK);
 	}
 
+    //getProducto(uno solo)
     @PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
 	@RequestMapping(value = "/{prodId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Producto> getProducto(@PathVariable("prodId") int prodId) {
@@ -85,7 +102,8 @@ public class ProductoRestController {
 		}
 		return new ResponseEntity<Producto>(prod, HttpStatus.OK);
 	}
-
+    
+    //addProducto ->por post con la id
     @PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Producto> addProducto(@RequestBody @Valid Producto prod, BindingResult bindingResult,
@@ -101,7 +119,7 @@ public class ProductoRestController {
 		headers.setLocation(ucBuilder.path("/api/owners/{id}").buildAndExpand(prod.getId()).toUri());
 		return new ResponseEntity<Producto>(prod, headers, HttpStatus.CREATED);
 	}
-
+    //updateProducto por put con la id
     @PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
 	@RequestMapping(value = "/{prodId}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<Producto> updateProducto(@PathVariable("prodId") int prodId, @RequestBody @Valid Producto prod,
@@ -125,7 +143,7 @@ public class ProductoRestController {
 		this.invService.saveProducto(currentProd);
 		return new ResponseEntity<Producto>(currentProd, HttpStatus.NO_CONTENT);
 	}
-
+    //deleteProducto por delete con la id
     @PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
 	@RequestMapping(value = "/{prodId}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@Transactional
