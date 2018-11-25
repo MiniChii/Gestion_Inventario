@@ -36,6 +36,7 @@ public interface InventarioService {
 	Producto findProductoById(int prodId) throws DataAccessException;
 	void saveProducto(Producto prod) throws DataAccessException;
 	void deleteProducto(Producto prod) throws DataAccessException;
+	Collection<Producto> OrderByPrecio();
 	
 
 }
