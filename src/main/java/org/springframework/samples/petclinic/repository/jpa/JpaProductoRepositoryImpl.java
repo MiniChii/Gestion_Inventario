@@ -44,7 +44,6 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
     @PersistenceContext
     private EntityManager em;
 
-
     /**
      * Important: in the current version of this method, we load Owners with all their Pets and Visits while
      * we do not need Visits at all and we only need one property from the Pet objects (the 'name' property).
@@ -69,7 +68,6 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
         } else {
             this.em.merge(prod);
         }
-
     }
     
 	@SuppressWarnings("unchecked")
@@ -119,15 +117,12 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
 		return query.getResultList();
 	}
 
-	
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<Producto> OrderByNombre(){
 		Query query = this.em.createQuery("SELECT producto FROM Producto");
 		return query.getResultList();
 	}
-
-
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -137,10 +132,5 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
 		query.setParameter("maxPrecioProd", maxPrecioProd);		
 		return query.getResultList();
 	}
-
-
-
-
-
 
 }

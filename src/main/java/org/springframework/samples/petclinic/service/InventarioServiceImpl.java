@@ -61,7 +61,6 @@ public class InventarioServiceImpl implements InventarioService {
 	@Transactional(readOnly = true)
 	public Collection<Producto> findProductoByName(String prodNombre) throws DataAccessException {
 		return productoRepository.findByNombreStartingWithIgnoreCase(prodNombre);
-
 	}
 	
 	@Transactional(readOnly = true)

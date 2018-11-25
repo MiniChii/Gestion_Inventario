@@ -52,7 +52,6 @@ public interface ProductoRepository {
 
 	Collection<Producto> findByPrecioBetween(int minPrecioProd, int maxPrecioProd);
 
-
 	Collection<Producto> OrderByNombre() throws DataAccessException;
 
 }
