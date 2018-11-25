@@ -48,4 +48,6 @@ public interface ProductoRepository {
 
 	void delete(Producto producto) throws DataAccessException;
 
+	Collection<Producto> findByNombreContainingIgnoreCase(String nombre) throws DataAccessException;
+
 }

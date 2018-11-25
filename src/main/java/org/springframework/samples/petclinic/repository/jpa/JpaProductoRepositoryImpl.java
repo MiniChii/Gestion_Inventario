@@ -117,5 +117,17 @@ public class JpaProductoRepositoryImpl implements ProductoRepository{
 		return query.getResultList();
 	}
 
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Producto> findByNombreContainingIgnoreCase(String nombre) {
+		Query query = this.em.createQuery("SELECT producto FROM Producto WHERE producto.nombre =:nombre");
+		query.setParameter("nombre", nombre);
+		return query.getResultList();
+	}
+
+
+
+
 
 }
