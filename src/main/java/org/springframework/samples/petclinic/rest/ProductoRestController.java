@@ -29,6 +29,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.samples.petclinic.model.Producto;
 import org.springframework.samples.petclinic.service.InventarioService;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,12 +55,25 @@ public class ProductoRestController {
 	//primer getProductosList -> por nombre
 	@PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
 	@RequestMapping(value = "/buscarNombre/{nombre}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	/*
 	public ResponseEntity<Collection<Producto>> getProductosList(@PathVariable("nombre") String prodNombre) {
 		if (prodNombre == null) {
 			prodNombre = "";
 		}
 		Collection<Producto> productos = this.invService.findProductoByName(prodNombre);
 		if (productos.isEmpty()) {
+			
+			return new ResponseEntity<Collection<Producto>>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Collection<Producto>>(productos, HttpStatus.OK);
+	}*/
+	public ResponseEntity<Collection<Producto>> getProductosList(@PathVariable("nombre") String prodNombre) {
+		if (prodNombre == null) {
+			prodNombre = "";
+		}
+		Collection<Producto> productos = this.invService.findProductoByName(prodNombre);
+		if (productos.isEmpty()) {
+			
 			return new ResponseEntity<Collection<Producto>>(HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<Collection<Producto>>(productos, HttpStatus.OK);
@@ -114,6 +128,13 @@ public class ProductoRestController {
 		}
 		return new ResponseEntity<Collection<Producto>>(prods, HttpStatus.OK);
 	}
+    /*public String getProductos() {
+		Collection<Producto> prods = this.invService.findAllProductos();
+		if (prods.isEmpty()) {
+			return "error";
+		}
+		return "productoList";
+	}*/
 
     //getProducto(uno solo)
     @PreAuthorize( "hasRole(@roles.PROD_ADMIN)" )
