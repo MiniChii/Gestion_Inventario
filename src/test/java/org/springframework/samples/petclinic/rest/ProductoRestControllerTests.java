@@ -113,6 +113,17 @@ public class ProductoRestControllerTests {
     	prod.setEstanteId(2);
     	productos.add(prod);
     	
+    	prod = new Producto();
+    	prod.setId(4);
+    	prod.setNombre("Perrina");
+    	prod.setNumMinimo(10);
+    	prod.setPrecio(5200);
+    	prod.setContenido(3);
+    	prod.setUnidadMedida("kg");
+    	prod.setEspecieId(2);
+    	prod.setEstanteId(1);
+    	productos.add(prod);
+    	
     }
     
     @Test
@@ -128,8 +139,43 @@ public class ProductoRestControllerTests {
             .andExpect(jsonPath("$.[0].nombre").value("Alimento para gato"));
         System.out.println(productos.toString());
     }
-/*
+    
+    //Diego
     @Test
+    @WithMockUser(roles="PROD_ADMIN")
+    public void obtieneProductoPorElNombre() throws Exception {
+    	given(this.inventarioService.findProductoByName("Perrina")).willReturn(productos);
+    	
+        this.mockMvc.perform(get("/api/productos/buscarNombre/Perrina")
+        	.accept(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType("application/json;charset=UTF-8"))
+            .andExpect(jsonPath("$.[3].id").value(4))
+            .andExpect(jsonPath("$.[3].nombre").value("Perrina"));
+        System.out.println(productos.toString());
+    }
+    
+    //Diego 
+    @Test
+    @WithMockUser(roles="OWNER_ADMIN")
+    public void NoObtieneProductoPorElNombre() throws Exception {
+    	given(this.inventarioService.findProductoByName("Perrina")).willReturn(null);
+        this.mockMvc.perform(get("/api/owners/Perrina")
+        	.accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isNotFound());
+    }
+/*
+   
+    @Test
+    @WithMockUser(roles="OWNER_ADMIN")
+    public void testGetOwnerNotFound() throws Exception {
+    	given(this.inventarioService.findOwnerById(-1)).willReturn(null);
+        this.mockMvc.perform(get("/api/owners/-1")
+        	.accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isNotFound());
+    }
+
+	@Test
     @WithMockUser(roles="OWNER_ADMIN")
     public void testGetOwnerSuccess() throws Exception {
     	given(this.inventarioService.findOwnerById(1)).willReturn(productos.get(0));
@@ -139,15 +185,6 @@ public class ProductoRestControllerTests {
             .andExpect(content().contentType("application/json;charset=UTF-8"))
             .andExpect(jsonPath("$.id").value(1))
             .andExpect(jsonPath("$.firstName").value("George"));
-    }
-
-    @Test
-    @WithMockUser(roles="OWNER_ADMIN")
-    public void testGetOwnerNotFound() throws Exception {
-    	given(this.inventarioService.findOwnerById(-1)).willReturn(null);
-        this.mockMvc.perform(get("/api/owners/-1")
-        	.accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isNotFound());
     }
 
     @Test
