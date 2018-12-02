@@ -137,7 +137,7 @@ public class ProductoRestControllerTests {
             .andExpect(content().contentType("application/json;charset=UTF-8"))
             .andExpect(jsonPath("$.[0].id").value(1))
             .andExpect(jsonPath("$.[0].nombre").value("Alimento para gato"));
-        System.out.println(productos.toString());
+
     }
     
     //Diego
@@ -152,17 +152,18 @@ public class ProductoRestControllerTests {
             .andExpect(content().contentType("application/json;charset=UTF-8"))
             .andExpect(jsonPath("$.[3].id").value(4))
             .andExpect(jsonPath("$.[3].nombre").value("Perrina"));
-        System.out.println(productos.toString());
+
     }
     
     //Diego 
     @Test
     @WithMockUser(roles="OWNER_ADMIN")
     public void NoObtieneProductoPorElNombre() throws Exception {
-    	given(this.inventarioService.findProductoByName("Perrina")).willReturn(null);
+    	given(this.inventarioService.findProductoByName("Master Dog")).willReturn(productos);
         this.mockMvc.perform(get("/api/owners/Perrina")
         	.accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isNotFound());
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.[0].id").doesNotExist());
     }
 /*
    
