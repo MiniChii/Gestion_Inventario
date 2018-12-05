@@ -166,13 +166,14 @@ public class ProductoRestControllerTests {
              
             .andExpect(jsonPath("$.[0].id").doesNotExist());
     }
-    
+    /*
     //Francisca
     @Test
     @WithMockUser(roles="OWNER_ADMIN")
     public void testIngresarNuevoProductoExitoso(){
     	
     }
+    */
     
 /*
     @Test

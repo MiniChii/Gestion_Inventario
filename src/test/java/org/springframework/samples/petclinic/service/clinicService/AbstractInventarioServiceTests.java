@@ -110,8 +110,6 @@ public abstract class AbstractInventarioServiceTests {
     	prod.setUnidadMedida("kg");
     	prod.setEspecieId(1);
     	prod.setEstanteId(1);
-
-    	
     	int size = this.inventarioService.findAllProductos().size();
     	
     	this.inventarioService.saveProducto(prod);
@@ -119,6 +117,28 @@ public abstract class AbstractInventarioServiceTests {
     	assertThat(this.inventarioService.findAllProductos().size()).isEqualTo(size+1);
     	
     }
+    
+    //Juan
+    @Test
+    @Transactional
+    public void intentarIngresarNuevoProductoFallido(){
+    	Producto prod = new Producto();
+    	prod.setId(152);
+    	prod.setNombre("Alimento para gato");
+    	prod.setNumMinimo(8);
+    	prod.setPrecio(4000);
+    	prod.setContenido(1);
+    	prod.setUnidadMedida("kg");
+    	prod.setEspecieId(1);
+    	prod.setEstanteId(1);
+    	int size = this.inventarioService.findAllProductos().size();
+    	
+    	this.inventarioService.saveProducto(prod);
+    	
+    	assertThat(this.inventarioService.findAllProductos().size()).isEqualTo(size);
+    	
+    }
+    
     
     
 /*
