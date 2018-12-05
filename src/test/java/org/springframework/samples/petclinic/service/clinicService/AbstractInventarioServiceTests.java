@@ -67,29 +67,29 @@ public abstract class AbstractInventarioServiceTests {
     public void init() {
         MockitoAnnotations.initMocks(this);
     }
-    
+    /*Este lo hicimos con la profe, "todos"*/
     @Test
     public void deberiaEncontrarProductosCuandoInvocafindAllProductos() {
-    	//arrange
+    	//arrange - inicializzaciones cosas necesarias para hacer funcionar la prueba
     	Collection<Producto> productos;
     	
-    	//act
+    	//act - la clase que se invoca
     	productos= this.inventarioService.findAllProductos();
-    	//assert
+    	//assert - prueba en este caso se verifica que hay 11 productos
     	assertThat(productos.size()).isEqualTo(11);
     			
     }
-    
+    /*Este lo hicimos con la profe, "todos"*/
     @Test
     @Transactional
     public void noDeberiaEncontrarProductosCuandoInvocaFindAllProductos() {
     	//el nombre del test debe especificar que es lo que hace, aunque sea largo
-    	//arrange
+    	//arrange - borra todos los productos TEMPORLAMENTE	para poder hacer las pruebas
     	Collection<Producto> productos;
     	for (int i = 151; i < 162; i++) {
 			this.inventarioService.deleteProducto(this.inventarioService.findProductoById(i));
 		}
-    	//act
+    	//act - invoca al servicio
     	productos= this.inventarioService.findAllProductos();
     	//assert
     	assertTrue(productos.isEmpty());

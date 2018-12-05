@@ -159,10 +159,10 @@ public class ProductoRestControllerTests {
     @Test
     @WithMockUser(roles="OWNER_ADMIN")
     public void NoObtieneProductoPorElNombre() throws Exception {
-    	given(this.inventarioService.findProductoByName("Master Dog")).willReturn(productos);
-        this.mockMvc.perform(get("/api/owners/Perrina")
+    	given(this.inventarioService.findProductoByName("MasterDog")).willReturn(productos);
+        this.mockMvc.perform(get("/api/productos/buscarNombre/MasterDog")
         	.accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isNotFound())
+             
             .andExpect(jsonPath("$.[0].id").doesNotExist());
     }
 /*
