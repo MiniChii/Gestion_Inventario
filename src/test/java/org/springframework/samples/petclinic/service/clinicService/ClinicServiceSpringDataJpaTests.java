@@ -11,10 +11,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @author Michael Isvy
  * @see AbstractClinicServiceTests AbstractClinicServiceTests for more details. </p>
  */
-
+/*
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
 @ActiveProfiles("spring-data-jpa, hsqldb")
 public class ClinicServiceSpringDataJpaTests extends AbstractClinicServiceTests{
 
 }
+*/

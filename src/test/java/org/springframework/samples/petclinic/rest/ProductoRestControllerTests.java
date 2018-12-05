@@ -47,6 +47,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -125,7 +126,7 @@ public class ProductoRestControllerTests {
     	productos.add(prod);
     	
     }
-    
+    /*con la profe*/
     @Test
     @WithMockUser(roles="PROD_ADMIN")
     public void obtieneProductosEnUnRangoDePrecios() throws Exception {
@@ -165,8 +166,26 @@ public class ProductoRestControllerTests {
              
             .andExpect(jsonPath("$.[0].id").doesNotExist());
     }
+    
+    //Francisca
+    @Test
+    @WithMockUser(roles="OWNER_ADMIN")
+    public void testIngresarNuevoProductoExitoso(){
+    	
+    }
+    
 /*
-   
+    @Test
+    @WithMockUser(roles="OWNER_ADMIN")
+    public void testCreateOwnerSuccess() throws Exception {
+    	Owner newOwner = productos.get(0);
+    	newOwner.setId(999);
+    	ObjectMapper mapper = new ObjectMapper();
+    	String newOwnerAsJSON = mapper.writeValueAsString(newOwner);
+    	this.mockMvc.perform(post("/api/owners/")
+    		.content(newOwnerAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
+    		.andExpect(status().isCreated());
+    }
     @Test
     @WithMockUser(roles="OWNER_ADMIN")
     public void testGetOwnerNotFound() throws Exception {
@@ -240,17 +259,7 @@ public class ProductoRestControllerTests {
             .andExpect(status().isNotFound());
     }
 
-    @Test
-    @WithMockUser(roles="OWNER_ADMIN")
-    public void testCreateOwnerSuccess() throws Exception {
-    	Owner newOwner = productos.get(0);
-    	newOwner.setId(999);
-    	ObjectMapper mapper = new ObjectMapper();
-    	String newOwnerAsJSON = mapper.writeValueAsString(newOwner);
-    	this.mockMvc.perform(post("/api/owners/")
-    		.content(newOwnerAsJSON).accept(MediaType.APPLICATION_JSON_VALUE).contentType(MediaType.APPLICATION_JSON_VALUE))
-    		.andExpect(status().isCreated());
-    }
+
 
     @Test
     @WithMockUser(roles="OWNER_ADMIN")

@@ -35,6 +35,7 @@ import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.samples.petclinic.service.InventarioService;
 import org.springframework.samples.petclinic.util.EntityUtils;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -96,9 +97,53 @@ public abstract class AbstractInventarioServiceTests {
     	
     }
     
+    //Francisca
+    @Test
+    @Transactional
+    public void testIngresarNuevoProductoExitoso(){
+    	Producto prod = new Producto();
+    	prod.setId(1);
+    	prod.setNombre("Alimento para gato");
+    	prod.setNumMinimo(8);
+    	prod.setPrecio(4000);
+    	prod.setContenido(1);
+    	prod.setUnidadMedida("kg");
+    	prod.setEspecieId(1);
+    	prod.setEstanteId(1);
+
+    	
+    	int size = this.inventarioService.findAllProductos().size();
+    	
+    	this.inventarioService.saveProducto(prod);
+    	
+    	assertThat(this.inventarioService.findAllProductos().size()).isEqualTo(size+1);
+    	
+    }
     
     
 /*
+    @Test
+    @Transactional
+    public void shouldInsertPetIntoDatabaseAndGenerateId() {
+        Owner owner6 = this.inventarioService.findOwnerById(6);
+        int found = owner6.getPets().size();
+
+        Pet pet = new Pet();
+        pet.setName("bowser");
+        Collection<PetType> types = this.inventarioService.findPetTypes();
+        pet.setType(EntityUtils.getById(types, PetType.class, 2));
+        pet.setBirthDate(new Date());
+        owner6.addPet(pet);
+        assertThat(owner6.getPets().size()).isEqualTo(found + 1);
+
+        this.inventarioService.savePet(pet);
+        this.inventarioService.saveOwner(owner6);
+
+        owner6 = this.inventarioService.findOwnerById(6);
+        assertThat(owner6.getPets().size()).isEqualTo(found + 1);
+        // checks that id has been generated
+        assertThat(pet.getId()).isNotNull();
+    }
 
     @Test
     @Transactional
@@ -169,28 +214,6 @@ public abstract class AbstractInventarioServiceTests {
 //        assertThat(petType4.getName()).isEqualTo("snake");
 //    }
 
-    @Test
-    @Transactional
-    public void shouldInsertPetIntoDatabaseAndGenerateId() {
-        Owner owner6 = this.inventarioService.findOwnerById(6);
-        int found = owner6.getPets().size();
-
-        Pet pet = new Pet();
-        pet.setName("bowser");
-        Collection<PetType> types = this.inventarioService.findPetTypes();
-        pet.setType(EntityUtils.getById(types, PetType.class, 2));
-        pet.setBirthDate(new Date());
-        owner6.addPet(pet);
-        assertThat(owner6.getPets().size()).isEqualTo(found + 1);
-
-        this.inventarioService.savePet(pet);
-        this.inventarioService.saveOwner(owner6);
-
-        owner6 = this.inventarioService.findOwnerById(6);
-        assertThat(owner6.getPets().size()).isEqualTo(found + 1);
-        // checks that id has been generated
-        assertThat(pet.getId()).isNotNull();
-    }
 
     @Test
     @Transactional
