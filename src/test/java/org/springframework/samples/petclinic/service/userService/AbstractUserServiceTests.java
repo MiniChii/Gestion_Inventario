@@ -20,7 +20,7 @@ public abstract class AbstractUserServiceTests {
     public void init() {
         MockitoAnnotations.initMocks(this);
     }
-
+/*
     @Test
     public void shouldAddUser() throws Exception {
         User user = new User();
@@ -33,4 +33,5 @@ public abstract class AbstractUserServiceTests {
         assertThat(user.getRoles().parallelStream().allMatch(role -> role.getName().startsWith("ROLE_")), is(true));
         assertThat(user.getRoles().parallelStream().allMatch(role -> role.getUser() != null), is(true));
     }
+    */
 }

@@ -130,8 +130,8 @@ public class ProductoRestControllerTests {
     @Test
     @WithMockUser(roles="PROD_ADMIN")
     public void obtieneProductosEnUnRangoDePrecios() throws Exception {
-    	given(this.inventarioService.findProductoByPrecio(1100, 50000)).willReturn(productos);
-    	
+    	given(this.productoRestController.getProductosListPrecio(1100, 50000).getBody()).willReturn(productos);
+
         this.mockMvc.perform(get("/api/productos/buscarPrecio/1100/50000")
         	.accept(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(status().isOk())
@@ -145,7 +145,7 @@ public class ProductoRestControllerTests {
     @Test
     @WithMockUser(roles="PROD_ADMIN")
     public void obtieneProductoPorElNombre() throws Exception {
-    	given(this.inventarioService.findProductoByName("Perrina")).willReturn(productos);
+    	given(this.productoRestController.getProductosList("Perrina").getBody()).willReturn(productos);
     	
         this.mockMvc.perform(get("/api/productos/buscarNombre/Perrina")
         	.accept(MediaType.APPLICATION_JSON_VALUE))
@@ -158,12 +158,11 @@ public class ProductoRestControllerTests {
     
     //Diego 
     @Test
-    @WithMockUser(roles="OWNER_ADMIN")
+    @WithMockUser(roles="PROD_ADMIN")
     public void NoObtieneProductoPorElNombre() throws Exception {
-    	given(this.inventarioService.findProductoByName("MasterDog")).willReturn(productos);
+    	given(this.productoRestController.getProductosList("MasterDog").getBody()).willReturn(null);
         this.mockMvc.perform(get("/api/productos/buscarNombre/MasterDog")
         	.accept(MediaType.APPLICATION_JSON))
-             
             .andExpect(jsonPath("$.[0].id").doesNotExist());
     }
     /*

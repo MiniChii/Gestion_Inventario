@@ -132,12 +132,27 @@ public abstract class AbstractInventarioServiceTests {
     	prod.setEspecieId(1);
     	prod.setEstanteId(1);
     	int size = this.inventarioService.findAllProductos().size();
-    	
+ 
     	this.inventarioService.saveProducto(prod);
     	
     	assertThat(this.inventarioService.findAllProductos().size()).isEqualTo(size);
     	
     }
+    //Ignacio
+    @Test
+    @Transactional
+    public void noDeberiaEncontrarProductosCuandoElIdNoExisteInvocanoFindByEspecieId() {
+        
+        //arrange
+        Collection<Producto> productos;
+        
+        //act
+        productos= this.inventarioService.findByEspecieId(0);
+        //assert
+        assertTrue(productos.isEmpty());        
+
+    }
+
     
     
     

@@ -53,6 +53,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  *
  * @author Vitaliy Fedoriv
  */
+
 @SpringBootTest
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes=ApplicationTestConfig.class)
@@ -114,6 +115,7 @@ public class OwnerRestControllerTests {
 
 
     }
+    
     /*
     @Test
     @WithMockUser(roles="OWNER_ADMIN")
